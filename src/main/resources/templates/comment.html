@@ -1,0 +1,8 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<form th:method="POST" th:action="@{/comment}" th:object="${comment}">
+    <p><label for="text">Comment text:</label></p>
+    <textarea id="text" name="text"></textarea>
+    <input type="hidden" th:name="pubId" th:value="${pubId}">
+    <br>
+    <input type="submit" value="Create">
+</form>

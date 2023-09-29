@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Switter</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+    <h1>Publications by user <span th:text="${userName}"/></h1>
+    <a th:href="@{/page}">Your page</a>
+    <br>
+    <br>
+    <div th:each="publication: ${pubs}">
+        <textarea disabled th:text="${publication.text}"></textarea>
+        <p>
+            Written by: <span th:text="${publication.user.username}" />
+            <br>
+            Go to <a th:href="@{'/publication/' + ${publication.id}}">the publication</a>
+        </p>
+        <br>
+    </div>
+
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout">
+    </form>
+</body>
+</html>

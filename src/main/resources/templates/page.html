@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Switter</title>
+</head>
+<body>
+    <h1>This is your page</h1>
+    <div th:if="${userError}">
+        <span th:text="${userError}"/>
+    </div>
+    Create your <a th:href="@{/publication}">publication</a>
+    <br>
+    My <a th:href="@{/publication/user}">publications</a>
+    <br>
+    All <a th:href="@{/publication/users/all}">publications</a>
+    <br>
+    My <a th:href="@{/subscription/my}">subscriptions</a>
+
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout">
+    </form>
+
+    <div id="container">
+
+    </div>
+
+
+</body>
+</html>

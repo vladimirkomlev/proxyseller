@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Switter</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+    <h1>Create your publication</h1>
+    <a th:href="@{/page}">Your page</a>
+    <br>
+    <form method="POST" th:action="@{/publication}">
+        <p><label for="text">Text:</label></p>
+        <textarea id="text" name="text"></textarea>
+        <br>
+
+        <input type="submit" value="Create">
+    </form>
+
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout">
+    </form>
+</body>
+</html>

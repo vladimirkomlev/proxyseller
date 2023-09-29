@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Switter</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+    <h1>My subscriptions</h1>
+    <a th:href="@{/page}">Your page</a>
+    <br>
+    <br>
+    <div th:each="sUser: ${subs}">
+        <p>
+            Name is <a th:href="@{'/publication/user/' + ${sUser.id}}" th:text="*{sUser.username}"></a>
+        </p>
+    </div>
+</body>
+</html>

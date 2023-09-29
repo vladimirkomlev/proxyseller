@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Switter</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+    <h1>publication</h1>
+    <a th:href="@{/page}">Your page</a>
+    <br>
+    <br>
+    <div th:if="${userError}" class="validationError">
+        <span th:text="${userError}" />
+    </div>
+    <div th:object="${currentPub}">
+        <input type="hidden" id="createdPubId" th:value="*{id}">
+        <textarea disabled th:field="*{text}"></textarea>
+        <p>
+            Written by: <span th:text="*{user.username}" />
+        </p>
+        <form th:if="*{user.username}!=${currentUsername} and ${subscribedUser==null}" th:method="POST" th:action="@{'/subscription/subscribe/' + *{id}}">
+            <input type="submit" value="Subscribe">
+        </form>
+        <form th:if="*{user.username}!=${currentUsername} and ${subscribedUser!=null}" th:method="POST" th:action="@{'/subscription/unsubscribe/' + *{id}}">
+            <input type="submit" value="Unsubscribe">
+        </form>
+        <form th:method="PUT" th:action="@{'/publication/' + *{id}}">
+            <input type="submit" value="Update publication">
+        </form>
+        <form th:method="DELETE" th:action="@{'/publication/' + *{id}}">
+            <input type="submit" value="Delete publication">
+        </form>
+        <form th:method="GET" th:action="@{/publication}">
+            <input type="submit" value="Create publication">
+        </form>
+    </div>
+
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout">
+    </form>
+
+    <div id="comment">
+        <button type="button" onclick="loadCommentForm()">Add comment</button>
+    </div>
+
+    <div th:each="comment: ${comments}">
+        <textarea disabled th:text="${comment.text}"></textarea>
+        <p>
+            commented by <span th:text="${comment.user.username}" />
+            <br>
+        </p>
+    </div>
+    <script>
+        function loadCommentForm(){
+            console.log('inside method');
+            const xhr = new XMLHttpRequest();
+            const container = document.getElementById('comment');
+            const pubId = document.getElementById('createdPubId').value;
+            const urlWithParams = '/comment?pubId=' + pubId;
+            console.log('urlWithParams:'+urlWithParams);
+
+            xhr.onreadystatechange = function(){
+                if(this.status === 200){
+                    container.innerHTML = xhr.responseText;
+                    console.log('log works!');
+                }else{
+                    console.log('it is error');
+                }
+            };
+            xhr.open('get', urlWithParams, false);
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
