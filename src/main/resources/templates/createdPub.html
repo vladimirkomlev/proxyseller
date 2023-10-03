@@ -53,19 +53,16 @@
     </div>
     <script>
         function loadCommentForm(){
-            console.log('inside method');
             const xhr = new XMLHttpRequest();
             const container = document.getElementById('comment');
             const pubId = document.getElementById('createdPubId').value;
             const urlWithParams = '/comment?pubId=' + pubId;
-            console.log('urlWithParams:'+urlWithParams);
 
             xhr.onreadystatechange = function(){
                 if(this.status === 200){
                     container.innerHTML = xhr.responseText;
-                    console.log('log works!');
                 }else{
-                    console.log('it is error');
+                    console.log('some error');
                 }
             };
             xhr.open('get', urlWithParams, false);

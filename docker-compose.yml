@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+    mongo:
+        ports:
+            - 27017:27017
+        container_name: comp-my-mongo
+        image: mongo
+    app:
+        depends_on:
+            - mongo
+        build: .
+        ports:
+            - 8080:8080
+        container_name: comp-my-app
